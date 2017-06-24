@@ -1,0 +1,12 @@
+human_new:
+    path:     /human/new
+    defaults: { _controller: AcmDatacollectorBundle:Human:newApi }
+    methods: [POST]
+
+user_new:
+    path: /human/create
+    defaults: {_controller: AcmDatacollectorBundle:Human:create}
+
+test_uri:
+    path: /test
+    defaults: {_controller: AcmDatacollectorBundle:Human:test}

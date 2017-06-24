@@ -1,0 +1,4 @@
+services:
+#    acm_datacollector.example:
+#        class: Acm\DatacollectorBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

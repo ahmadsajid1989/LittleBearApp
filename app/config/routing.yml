@@ -1,3 +1,12 @@
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
+acm_datacollector:
+    resource: "@AcmDatacollectorBundle/Resources/config/routing.yml"
+    prefix:   /api
+
+user_me:
+    path: /user/me/{apiKey}
+    defaults: {_controller: AcmDatacollectorBundle:User:findUser}
+    methods: [GET]
+
+api_login_check:
+    path: /api/login_check
+

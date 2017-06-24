@@ -1,0 +1,56 @@
+Acm\DatacollectorBundle\Entity\Human:
+    type:   entity
+    table:  human
+    repositoryClass: Acm\DatacollectorBundle\Repository\HumanRepository
+    cache:
+        usage : NONSTRICT_READ_WRITE
+        region: region_human
+    indexes:
+        name_index:
+           columns: [fullname]
+        system_id_index:
+           columns: [unique_id]
+    gedmo:
+        loggable: true
+    id:
+        id:
+            type:   integer
+            generator:
+                strategy:   AUTO
+
+    fields:
+        fullname:
+            type:   string
+            length: 255
+        unique_id:
+            type: string
+            length: 15
+        dateofbirth:
+            type: date
+        dob_flag:
+            type: boolean
+        sex:
+            type: string
+            length: 10
+        age:
+            type: integer
+        age_flag:
+            type: boolean
+        picture:
+            type: string
+            length: 255
+            nullable: true
+        verified:
+            type: boolean
+            nullable: true
+        created_at:
+            type: datetime
+        updated_at:
+            type: datetime
+            nullable: true
+
+    lifecycleCallbacks:
+        prePersist: [ setCreatedAtValue, setSystemIdValue ]
+        preUpdate:  [ setUpdatedAtValue ]
+
+
