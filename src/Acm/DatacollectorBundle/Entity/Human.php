@@ -46,11 +46,6 @@ class Human
     private $age;
 
     /**
-     * @var boolean
-     */
-    private $age_flag;
-
-    /**
      * @var string
      */
     private $picture;
@@ -223,30 +218,6 @@ class Human
     public function getAge()
     {
         return $this->age;
-    }
-
-    /**
-     * Set ageFlag
-     *
-     * @param boolean $ageFlag
-     *
-     * @return Human
-     */
-    public function setAgeFlag($ageFlag)
-    {
-        $this->age_flag = $ageFlag;
-
-        return $this;
-    }
-
-    /**
-     * Get ageFlag
-     *
-     * @return boolean
-     */
-    public function getAgeFlag()
-    {
-        return $this->age_flag;
     }
 
     /**

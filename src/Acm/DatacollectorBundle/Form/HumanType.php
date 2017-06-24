@@ -29,7 +29,6 @@ class HumanType extends AbstractType
             ))*/
             ->add('sex')
             ->add('age')
-            ->add('ageFlag')
             ;
     }
 

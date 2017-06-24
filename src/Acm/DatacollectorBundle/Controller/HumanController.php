@@ -18,9 +18,20 @@ class HumanController extends Controller
 
         $human = new Human();
         $form = $this->createForm(HumanType::class, $human);
-        $form->submit($data);
-
         $em = $this->getDoctrine()->getManager();
+        //for test purpose
+
+         if (!isset($data['dateofbirth'])) {
+             $age = $data['age'];
+             $today = new \DateTime('now');
+             $newDob = $today->modify("-$age year")->format('Y-m-d');
+             $dateOfBirth = new \DateTime($newDob);
+         }
+
+        $form->submit($data);
+        if (!isset($data['dateofbirth'])) {
+            $human->setDateofbirth($dateOfBirth);
+        }
         $em->persist($human);
         $em->flush();
 
@@ -42,6 +53,6 @@ class HumanController extends Controller
 
     public function testAction()
     {
-        return new Response("Hello");
+        return new Response('Hello');
     }
 }

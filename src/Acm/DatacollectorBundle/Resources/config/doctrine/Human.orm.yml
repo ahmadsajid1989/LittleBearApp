@@ -34,8 +34,6 @@ Acm\DatacollectorBundle\Entity\Human:
             length: 10
         age:
             type: integer
-        age_flag:
-            type: boolean
         picture:
             type: string
             length: 255
