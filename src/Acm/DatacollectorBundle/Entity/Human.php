@@ -6,34 +6,34 @@ use Doctrine\ORM\Mapping as ORM;
 use Acm\DatacollectorBundle\Utility\Utility;
 
 /**
- * Human
+ * Human.
  */
 class Human
 {
     /**
-     * @var integer
+     * @var int
      */
     private $id;
 
     /**
      * @var string
      */
-    private $fullname;
+    private $fullName;
 
     /**
      * @var string
      */
-    private $unique_id;
+    private $uniqueId;
 
     /**
      * @var \DateTime
      */
-    private $dateofbirth;
+    private $dateOfBirth;
 
     /**
-     * @var boolean
+     * @var bool
      */
-    private $dob_flag;
+    private $dobFlag;
 
     /**
      * @var string
@@ -41,7 +41,7 @@ class Human
     private $sex;
 
     /**
-     * @var integer
+     * @var int
      */
     private $age;
 
@@ -51,25 +51,29 @@ class Human
     private $picture;
 
     /**
-     * @var boolean
+     * @var bool
      */
     private $verified;
 
     /**
      * @var \DateTime
      */
-    private $created_at;
+    private $createdAt;
 
     /**
      * @var \DateTime
      */
-    private $updated_at;
-
+    private $updatedAt;
 
     /**
-     * Get id
+     * @var \Acm\DatacollectorBundle\Entity\HouseHold
+     */
+    private $houseHold;
+
+    /**
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -77,118 +81,70 @@ class Human
     }
 
     /**
-     * Set fullname
-     *
-     * @param string $fullname
-     *
-     * @return Human
-     */
-    public function setFullname($fullname)
-    {
-        $this->fullname = $fullname;
-
-        return $this;
-    }
-
-    /**
-     * Get fullname
-     *
      * @return string
      */
-    public function getFullname()
+    public function getFullName()
     {
-        return $this->fullname;
+        return $this->fullName;
     }
 
     /**
-     * Set uniqueId
-     *
-     * @param string $uniqueId
-     *
-     * @return Human
+     * @param string $fullName
      */
-    public function setUniqueId($uniqueId)
+    public function setFullName($fullName)
     {
-        $this->unique_id = $uniqueId;
-
-        return $this;
+        $this->fullName = $fullName;
     }
 
     /**
-     * Get uniqueId
-     *
      * @return string
      */
     public function getUniqueId()
     {
-        return $this->unique_id;
+        return $this->uniqueId;
     }
 
     /**
-     * Set dateofbirth
-     *
-     * @param \DateTime $dateofbirth
-     *
-     * @return Human
+     * @param string $uniqueId
      */
-    public function setDateofbirth($dateofbirth)
+    public function setUniqueId($uniqueId)
     {
-        $this->dateofbirth = $dateofbirth;
-
-        return $this;
+        $this->uniqueId = $uniqueId;
     }
 
     /**
-     * Get dateofbirth
-     *
      * @return \DateTime
      */
-    public function getDateofbirth()
+    public function getDateOfBirth()
     {
-        return $this->dateofbirth;
+        return $this->dateOfBirth;
     }
 
     /**
-     * Set dobFlag
-     *
-     * @param boolean $dobFlag
-     *
-     * @return Human
+     * @param \DateTime $dateOfBirth
+     */
+    public function setDateOfBirth($dateOfBirth)
+    {
+        $this->dateOfBirth = $dateOfBirth;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDobFlag()
+    {
+        return $this->dobFlag;
+    }
+
+    /**
+     * @param bool $dobFlag
      */
     public function setDobFlag($dobFlag)
     {
-        $this->dob_flag = $dobFlag;
-
-        return $this;
+        $this->dobFlag = $dobFlag;
     }
 
     /**
-     * Get dobFlag
-     *
-     * @return boolean
-     */
-    public function getDobFlag()
-    {
-        return $this->dob_flag;
-    }
-
-    /**
-     * Set sex
-     *
-     * @param string $sex
-     *
-     * @return Human
-     */
-    public function setSex($sex)
-    {
-        $this->sex = $sex;
-
-        return $this;
-    }
-
-    /**
-     * Get sex
-     *
      * @return string
      */
     public function getSex()
@@ -197,23 +153,15 @@ class Human
     }
 
     /**
-     * Set age
-     *
-     * @param integer $age
-     *
-     * @return Human
+     * @param string $sex
      */
-    public function setAge($age)
+    public function setSex($sex)
     {
-        $this->age = $age;
-
-        return $this;
+        $this->sex = $sex;
     }
 
     /**
-     * Get age
-     *
-     * @return integer
+     * @return int
      */
     public function getAge()
     {
@@ -221,22 +169,14 @@ class Human
     }
 
     /**
-     * Set picture
-     *
-     * @param string $picture
-     *
-     * @return Human
+     * @param int $age
      */
-    public function setPicture($picture)
+    public function setAge($age)
     {
-        $this->picture = $picture;
-
-        return $this;
+        $this->age = $age;
     }
 
     /**
-     * Get picture
-     *
      * @return string
      */
     public function getPicture()
@@ -245,82 +185,67 @@ class Human
     }
 
     /**
-     * Set verified
-     *
-     * @param boolean $verified
-     *
-     * @return Human
+     * @param string $picture
      */
-    public function setVerified($verified)
+    public function setPicture($picture)
     {
-        $this->verified = $verified;
-
-        return $this;
+        $this->picture = $picture;
     }
 
     /**
-     * Get verified
-     *
-     * @return boolean
+     * @return bool
      */
-    public function getVerified()
+    public function isVerified()
     {
         return $this->verified;
     }
 
     /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return Human
+     * @param bool $verified
      */
-    public function setCreatedAt($createdAt)
+    public function setVerified($verified)
     {
-        $this->created_at = $createdAt;
-
-        return $this;
+        $this->verified = $verified;
     }
 
     /**
-     * Get createdAt
-     *
      * @return \DateTime
      */
     public function getCreatedAt()
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return Human
+     * @param \DateTime $createdAt
      */
-    public function setUpdatedAt($updatedAt)
+    public function setCreatedAt($createdAt)
     {
-        $this->updated_at = $updatedAt;
-
-        return $this;
+        $this->createdAt = $createdAt;
     }
 
     /**
-     * Get updatedAt
-     *
      * @return \DateTime
      */
     public function getUpdatedAt()
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
+
+    /**
+     * @param \DateTime $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
     /**
      * @ORM\PrePersist
      */
     public function setCreatedAtValue()
     {
-       $this->created_at = new \DateTime();
+        $this->createdAt = new \DateTime();
     }
 
     /**
@@ -328,7 +253,7 @@ class Human
      */
     public function setSystemIdValue()
     {
-        $this->unique_id = Utility::generateCode();
+        $this->uniqueId = Utility::generateCode();
     }
 
     /**
@@ -336,6 +261,78 @@ class Human
      */
     public function setUpdatedAtValue()
     {
-        $this->updated_at = new \DateTime();
+        $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * Set houseHold.
+     *
+     * @param \Acm\DatacollectorBundle\Entity\HouseHold $houseHold
+     *
+     * @return Human
+     */
+    public function setHouseHold(\Acm\DatacollectorBundle\Entity\HouseHold $houseHold = null)
+    {
+        $this->houseHold = $houseHold;
+
+        return $this;
+    }
+
+    /**
+     * Get houseHold.
+     *
+     * @return \Acm\DatacollectorBundle\Entity\HouseHold
+     */
+    public function getHouseHold()
+    {
+        return $this->houseHold;
+    }
+
+    /**
+     * Get dobFlag.
+     *
+     * @return bool
+     */
+    public function getDobFlag()
+    {
+        return $this->dobFlag;
+    }
+
+    /**
+     * Get verified.
+     *
+     * @return bool
+     */
+    public function getVerified()
+    {
+        return $this->verified;
+    }
+    /**
+     * @var \Acm\DatacollectorBundle\Entity\HouseHoldRole
+     */
+    private $houseHoldRole;
+
+    /**
+     * Set houseHoldRole.
+     *
+     * @param \Acm\DatacollectorBundle\Entity\HouseHoldRole $houseHoldRole
+     *
+     * @return Human
+     */
+    public function setHouseHoldRole(\Acm\DatacollectorBundle\Entity\HouseHoldRole $houseHoldRole = null)
+    {
+        $this->houseHoldRole = $houseHoldRole;
+
+        return $this;
+    }
+
+    /**
+     * Get houseHoldRole.
+     *
+     * @return \Acm\DatacollectorBundle\Entity\HouseHoldRole
+     */
+    public function getHouseHoldRole()
+    {
+        return $this->houseHoldRole;
     }
 }

@@ -1,0 +1,56 @@
+Acm\DatacollectorBundle\Entity\User:
+    type:   entity
+    table:  users
+    repositoryClass: Acm\DatacollectorBundle\Repository\UserRepository
+
+    gedmo:
+        loggable: true
+    id:
+        id:
+            type:   integer
+            generator:
+                strategy:   AUTO
+    fields:
+        username:
+            type:   string
+            unique: true
+            column: username
+            length: 180
+        password:
+            type: string
+            length: 64
+        email:
+            type: string
+            unique: true
+            length: 60
+            nullable: true
+        roles:
+            type: array
+        isActive:
+            type: boolean
+        userType:
+            type: string
+            length: 20
+            column: user_type
+        lastLogin:
+            type: datetime
+            nullable: true
+        confirmationToken:
+            type: string
+            nullable: true
+            column: confirmation_token
+        passwordRequestedAt:
+            type: datetime
+            nullable: true
+            column: password_requested_at
+        createdAt:
+            type: datetime
+            column: created_at
+        updatedAt:
+            type: datetime
+            nullable: true
+            column: updated_at
+
+    lifecycleCallbacks:
+        prePersist: [ setCreatedAtValue ]
+        preUpdate:  [ setUpdatedAtValue ]

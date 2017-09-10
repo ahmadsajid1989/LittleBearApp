@@ -1,0 +1,25 @@
+Acm\DatacollectorBundle\Entity\HouseHoldRole:
+    type:   entity
+    table:  house_hold_role
+    repositoryClass: Acm\DatacollectorBundle\Repository\HouseHoldRoleRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy:   AUTO
+
+    fields:
+        role:
+            type:   string
+            length: 60
+            unique: true
+        roleSlug:
+            type: string
+            length: 60
+            unique: true
+    oneToMany:
+        human:
+            targetEntity: Acm\DatacollectorBundle\Entity\Human
+            mappedBy: houseHoldRole
+

@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Acm\DatacollectorBundle\AcmDatacollectorBundle(),
             new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
             new Nelmio\CorsBundle\NelmioCorsBundle(),
+            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
 
         ];
 

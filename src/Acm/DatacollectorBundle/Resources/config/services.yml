@@ -1,4 +1,10 @@
 services:
-#    acm_datacollector.example:
-#        class: Acm\DatacollectorBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    acm_api.event.authentication_success_listener:
+        class: Acm\DatacollectorBundle\EventListener\AuthenticationSuccessListener
+        arguments: ['@service_container']
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccessResponse }
+
+    acm_api.pic_uploader:
+        class: Acm\DatacollectorBundle\Service\PictureUploader
+        arguments: ['%pic.upload.dir%']

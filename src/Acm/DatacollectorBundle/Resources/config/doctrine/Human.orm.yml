@@ -7,7 +7,7 @@ Acm\DatacollectorBundle\Entity\Human:
         region: region_human
     indexes:
         name_index:
-           columns: [fullname]
+           columns: [full_name]
         system_id_index:
            columns: [unique_id]
     gedmo:
@@ -19,16 +19,20 @@ Acm\DatacollectorBundle\Entity\Human:
                 strategy:   AUTO
 
     fields:
-        fullname:
+        fullName:
             type:   string
             length: 255
-        unique_id:
+            column: full_name
+        uniqueId:
             type: string
             length: 15
-        dateofbirth:
+            column: unique_id
+        dateOfBirth:
             type: date
-        dob_flag:
+            column: date_of_birth
+        dobFlag:
             type: boolean
+            column: dob_flag
         sex:
             type: string
             length: 10
@@ -41,11 +45,28 @@ Acm\DatacollectorBundle\Entity\Human:
         verified:
             type: boolean
             nullable: true
-        created_at:
+        createdAt:
             type: datetime
-        updated_at:
+            column: created_at
+        updatedAt:
             type: datetime
             nullable: true
+            column: updated_at
+    manyToOne:
+        houseHold:
+            targetEntity: HouseHold
+            inversedBy: human
+            joinColumn:
+                name: household_id
+                referencedColumnName: id
+
+        houseHoldRole:
+            targetEntity: Acm\DatacollectorBundle\Entity\HouseHoldRole
+            inversedBy: human
+            joinColumn:
+                name: house_hold_role_id
+                referencedColumnName: id
+
 
     lifecycleCallbacks:
         prePersist: [ setCreatedAtValue, setSystemIdValue ]

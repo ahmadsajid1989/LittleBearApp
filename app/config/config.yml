@@ -10,7 +10,7 @@ parameters:
 
 framework:
     #esi: ~
-    #translator: { fallbacks: ['%locale%'] }
+    translator: { fallbacks: ['%locale%'] }
     secret: '%secret%'
     router:
         resource: '%kernel.project_dir%/app/config/routing.yml'
@@ -89,3 +89,5 @@ nelmio_cors:
             allow_headers: ['X-Custom-Auth']
             allow_methods: ['POST', 'PUT', 'GET', 'DELETE']
             max_age: 3600
+
+nelmio_api_doc: ~

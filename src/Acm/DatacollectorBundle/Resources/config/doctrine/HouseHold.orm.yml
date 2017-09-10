@@ -1,0 +1,45 @@
+Acm\DatacollectorBundle\Entity\HouseHold:
+    type:   entity
+    table:  house_hold
+    repositoryClass: Acm\DatacollectorBundle\Repository\HouseHoldRepository
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy:   AUTO
+    fields:
+        systemId:
+            type:   string
+            length: 12
+            unique: true
+        friendlyName:
+            type: string
+            length: 128
+            unique: true
+        vulnerable:
+            type: boolean
+        updatedAt:
+            type: datetime
+            nullable: true
+
+    oneToOne:
+        location:
+            targetEntity: Location
+            mappedBy: house_hold
+            cascade:
+                  - persist
+
+    oneToMany:
+        human:
+            targetEntity: Acm\DatacollectorBundle\Entity\Human
+            mappedBy: houseHold
+            cascade:
+                - persist
+
+
+    lifecycleCallbacks:
+        prePersist: [ setSystemIdValue ]
+        preUpdate:  [ setUpdatedAtValue ]
+
+

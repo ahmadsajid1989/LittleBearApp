@@ -3,10 +3,23 @@ human_new:
     defaults: { _controller: AcmDatacollectorBundle:Human:newApi }
     methods: [POST]
 
-user_new:
-    path: /human/create
-    defaults: {_controller: AcmDatacollectorBundle:Human:create}
+householdrole_list:
+    path: /householdrole/list
+    defaults: {_controller: AcmDatacollectorBundle:HouseHoldRole:list}
 
-test_uri:
-    path: /test
-    defaults: {_controller: AcmDatacollectorBundle:Human:test}
+householdrole_by_slug:
+    path: /householdrole/find/slug/{slug}
+    defaults: {_controller: AcmDatacollectorBundle:HouseHoldRole:getRoleBySlug}
+
+householdrole_by_id:
+    path: /householdrole/find/id/{id}
+    defaults: {_controller: AcmDatacollectorBundle:HouseHoldRole:getRoleByid}
+
+household_list:
+    path: /household/list
+    defaults: {_controller: AcmDatacollectorBundle:HouseHold:list}
+
+household_by_system_id:
+    path: /household/find/system-id/{system_id}
+    defaults: {_controller: AcmDatacollectorBundle:HouseHold:getHouseHoldBySystemId}
+

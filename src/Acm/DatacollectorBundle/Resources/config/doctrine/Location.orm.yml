@@ -1,0 +1,89 @@
+Acm\DatacollectorBundle\Entity\Location:
+    type:   entity
+    table:  location
+    repositoryClass: Acm\DatacollectorBundle\Repository\LocationRepository
+    cache:
+        usage : NONSTRICT_READ_WRITE
+        region: region_location
+    gedmo:
+        loggable: true
+    id:
+        id:
+            type:   integer
+            generator:
+                strategy:   AUTO
+
+    fields:
+        addressVillage:
+            type:   string
+            length: 255
+            nullable: true
+        addressUpazilla:
+            type: string
+            length: 120
+            nullable: true
+        addressDistrict:
+            type: string
+            length: 120
+            nullable: true
+        addressDivision:
+            type: string
+            length: 60
+            nullable: true
+        hostAddressVillage:
+            type:   string
+            length: 255
+            nullable: true
+        hostAddressUpazilla:
+            type: string
+            length: 120
+            nullable: true
+        hostAddressDistrict:
+            type: string
+            length: 120
+            nullable: true
+        hostAddressDivision:
+            type: string
+            length: 60
+            nullable: true
+        campName:
+            type: string
+            length: 255
+            nullable: true
+        campBlock:
+            type: string
+            length: 120
+            nullable: true
+        campWard:
+            type: string
+            length: 120
+            nullable: true
+        gpsLatitude :
+            type: decimal
+            precision: 8
+            scale: 6
+        gpsLongitude :
+            type: decimal
+            precision: 9
+            scale: 6
+        createdAt:
+            type: datetime
+        updatedAt:
+            type: datetime
+            nullable: true
+
+
+    oneToOne:
+        house_hold:
+            targetEntity: Acm\DatacollectorBundle\Entity\HouseHold
+            inversedBy: location
+            joinColumn:
+                 name: house_hold_id
+                 referencedColumnName: id
+                 onDelete: CASCADE
+
+    lifecycleCallbacks:
+        prePersist: [ setCreatedAtValue ]
+        preUpdate:  [ setUpdatedAtValue ]
+
+
