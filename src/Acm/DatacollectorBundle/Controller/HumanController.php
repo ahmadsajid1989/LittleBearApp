@@ -18,29 +18,25 @@ class HumanController extends Controller
         $body = $request->getContent();
         $data = json_decode($body, true);
 
-
         $human = new Human();
         $form = $this->createForm(HumanType::class, $human);
-        $em = $this->getDoctrine()->getManager();
-        //for test purpose
 
-         if (!isset($data['dateofbirth'])) {
-             $age = $data['age'];
-             $dateOfBirth = $this->findDateofBirthFromAge($age);
-         }
+
+        $em = $this->getDoctrine()->getManager();
 
          if(isset($data['houseHold'])){
 
              $house = $em->getRepository("AcmDatacollectorBundle:HouseHold")->findOneBy(['id' => $data['houseHold']]);
 
-             if(!$house){
+             if($house){
 
+                 $human->setHouseHold($house);
+             }else{
 
                  return new JsonResponse(['message'=> "Household Not Found"], 404,['content-type'=> 'application/json']);
              }
-
-             $human->setHouseHold($house);
          }
+
 
          if(!isset($data['houseHold'])){
 
@@ -68,9 +64,6 @@ class HumanController extends Controller
 
              $location->setGpsLatitude($data['location.latitude']);
              $location->setGpsLongitude($data['location.longitude']);
-             $human->setHouseHold($houseHold);
-
-             $form->submit($data);
 
              $em->persist($houseHold);
              $em->persist($location);
@@ -79,38 +72,21 @@ class HumanController extends Controller
              $houseHoldId = $houseHold->getId();
              $house = $em->getRepository("AcmDatacollectorBundle:HouseHold")->findOneBy(['id' => $houseHoldId]);
 
-
+             $form->submit($data);
              $human->setHouseHold($house);
+             $em->persist($human);
+             $em->flush();
 
+
+         } else {
+
+             $form->submit($data);
+             $em->persist($human);
+             $em->flush();
          }
 
 
-
-
-        if (!isset($data['dateofbirth'])) {
-            $human->setDateofbirth($dateOfBirth);
-        }
-
-        $em->persist($human);
-        $em->flush();
-
-
-
-
-
         return new Response('Data Saved Successfully', 201);
-    }
-
-
-    private  function findDateofBirthFromAge($age){
-
-        $today = new \DateTime('now');
-        $newDob = $today->modify("-$age year")->format('Y-m-d');
-        $dateOfBirth = new \DateTime($newDob);
-
-        return $dateOfBirth;
-
-
     }
 
 

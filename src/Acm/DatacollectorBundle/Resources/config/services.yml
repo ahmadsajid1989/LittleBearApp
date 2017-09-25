@@ -8,3 +8,8 @@ services:
     acm_api.pic_uploader:
         class: Acm\DatacollectorBundle\Service\PictureUploader
         arguments: ['%pic.upload.dir%']
+
+    dob.listener:
+        class: Acm\DatacollectorBundle\EventListener\DateofBirthListener
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }

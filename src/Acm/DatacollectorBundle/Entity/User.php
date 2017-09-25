@@ -5,6 +5,9 @@ namespace Acm\DatacollectorBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 
 /**
@@ -28,6 +31,13 @@ class User implements AdvancedUserInterface, \Serializable
     private $password;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
+
+
+    /**
      * @var string
      */
     private $email;
@@ -40,7 +50,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var boolean
      */
-    private $isActive;
+    private $isActive = true;
 
     /**
      * @var string
@@ -129,6 +139,22 @@ class User implements AdvancedUserInterface, \Serializable
     public function getPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param $password
+     */
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
     }
 
     /**

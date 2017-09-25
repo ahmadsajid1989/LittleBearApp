@@ -6,9 +6,13 @@ acm_datacollector:
     resource: "@AcmDatacollectorBundle/Resources/config/routing.yml"
     prefix:   /api
 
+acm_registration:
+    path: /dashboard/register
+    defaults: {_controller: AcmDatacollectorBundle:User:register}
+
 acm_dashboard:
-    path: /dashboard
-    defaults: {_controller: AcmDatacollectorBundle:Default:index}
+    path: /dashboard/
+    defaults: {_controller: AcmDatacollectorBundle:User:register}
 
 #user_me:
 #    path: /user/me/{apiKey}

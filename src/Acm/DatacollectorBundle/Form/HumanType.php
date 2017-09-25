@@ -2,6 +2,7 @@
 
 namespace Acm\DatacollectorBundle\Form;
 
+use Acm\DatacollectorBundle\Entity\Human;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -23,13 +24,16 @@ class HumanType extends AbstractType
             ->add('age')
             ->add('houseHold')
             ->add('houseHoldRole');
+
     }
+
+
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
 
-            'data_class' => 'Acm\DatacollectorBundle\Entity\Human',
+            'data_class' => Human::class,
 
         ));
     }
@@ -38,4 +42,6 @@ class HumanType extends AbstractType
     {
         return 'human';
     }
+
+
 }
