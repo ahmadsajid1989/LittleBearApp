@@ -38,8 +38,7 @@ class HumanController extends Controller
          }
 
 
-         if(!isset($data['houseHold'])){
-
+         if(isset($data['houseHold.friendly_name'])){
 
              $houseHold = new HouseHold();
              $houseHold->setFriendlyName($data['houseHold.friendly_name']);

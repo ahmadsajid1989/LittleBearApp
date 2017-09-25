@@ -20,6 +20,7 @@ class HumanType extends AbstractType
                 'format' => 'yyyy-MM-dd',
             ))
             ->add('dobFlag')
+            ->add('maritalStatus')
             ->add('sex')
             ->add('age')
             ->add('houseHold')

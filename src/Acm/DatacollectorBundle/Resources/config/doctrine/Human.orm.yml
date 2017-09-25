@@ -38,6 +38,9 @@ Acm\DatacollectorBundle\Entity\Human:
             length: 10
         age:
             type: integer
+        maritalStatus:
+            type: string
+            length: 20
         picture:
             type: string
             length: 255

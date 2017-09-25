@@ -47,6 +47,12 @@ class Human
 
     /**
      * @var string
+     *
+     */
+
+    private $maritalStatus;
+    /**
+     * @var string
      */
     private $picture;
 
@@ -335,4 +341,21 @@ class Human
     {
         return $this->houseHoldRole;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getMaritalStatus()
+    {
+        return $this->maritalStatus;
+    }
+
+    /**
+     * @param mixed $maritalStatus
+     */
+    public function setMaritalStatus($maritalStatus)
+    {
+        $this->maritalStatus = $maritalStatus;
+    }
+
 }
