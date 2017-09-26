@@ -10,9 +10,10 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends Controller
 {
-    public function indexAction($name)
+    public function indexAction()
     {
-        return $this->render('', array('name' => $name));
+       ;
+        return $this->render('@AcmDatacollector/User/index.html.twig');
     }
 
     public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)

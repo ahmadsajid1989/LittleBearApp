@@ -6,12 +6,19 @@ acm_datacollector:
     resource: "@AcmDatacollectorBundle/Resources/config/routing.yml"
     prefix:   /api
 
+acm_dashboard:
+    resource: "@AcmDatacollectorBundle/Resources/config/routing/dashboard/routing.yml"
+    prefix:   /dashboard
+
+sg_datatables_bundle:
+    resource: "@SgDatatablesBundle/Controller/"
+    type:     annotation
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
 acm_registration:
     path: /dashboard/register
-    defaults: {_controller: AcmDatacollectorBundle:User:register}
-
-acm_dashboard:
-    path: /dashboard/
     defaults: {_controller: AcmDatacollectorBundle:User:register}
 
 #user_me:
@@ -22,3 +29,14 @@ acm_dashboard:
 api_login_check:
     path: /api/login_check
 
+login_form:
+    path: /login
+    defaults: {_controller: AcmDatacollectorBundle:Security:login}
+
+security_login_check:
+    path: /login_check
+    defaults: {_controller: AcmDatacollectorBundle:Security:loginCheck}
+
+logut:
+    path: /logout
+    defaults: {_controller: AcmDatacollectorBundle:Security:logout}

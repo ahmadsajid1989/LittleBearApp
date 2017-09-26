@@ -1,0 +1,1 @@
+fos.Router.setData({"base_url":"","routes":{"human_show":{"tokens":[["text","\/show"],["variable","\/","[^\/]++","id"],["text","\/dashboard\/human"]],"defaults":[],"requirements":[],"hosttokens":[]}},"prefix":"","host":"localhost","scheme":"http"});

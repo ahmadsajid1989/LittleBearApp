@@ -13,3 +13,11 @@ services:
         class: Acm\DatacollectorBundle\EventListener\DateofBirthListener
         tags:
             - { name: doctrine.event_listener, event: prePersist }
+
+    app.form_login_authenticator:
+            class: Acm\DatacollectorBundle\Security\FormLoginAuthenticator
+            arguments: ["@router", "@security.password_encoder"]
+
+    app.datatable.human:
+            class: Acm\DatacollectorBundle\Datatables\HumanDatatable
+            parent: sg_datatables.datatable.abstract

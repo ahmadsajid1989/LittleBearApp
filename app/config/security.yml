@@ -24,14 +24,6 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-#        main:
-#            pattern: ^/
-#            logout:     true
-#            anonymous:  true
-#            #stateless: true
-#            #simple_preauth:
-#             #   authenticator: apikey_authenticator
-#            #provider: api_key_user_provider
 
         login:
             pattern:  ^/api/login
@@ -55,26 +47,29 @@ security:
                 query_parameter:
                     enabled: true
                     name: bearer
-        dashboard:
-            pattern: ^/dashboard
-            provider: lb_db_provider
-            anonymous: true
-           # guard:
-           #     authenticators:
-            #        - lexik_jwt_authentication.jwt_token_authenticator
+        main:
+            pattern:    ^/
+            anonymous: ~
+            guard:
+                authenticators:
+                    - app.form_login_authenticator
+            logout:
+                path:   /logout
 
-            # activate different ways to authenticate
-
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-            #http_basic: ~
-
-            # https://symfony.com/doc/current/security/form_login_setup.html
-            #form_login: ~
+            remember_me:
+                secret:      "%secret%"
+                lifetime: 604800 # 1 week in seconds
+                path:     /
+                domain:   ~
 
 
     access_control:
          - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-         - { path: ^/dashboard, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/login,     roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
+         - { path: ^/dashboard, roles: IS_AUTHENTICATED_FULLY }
          - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
+
+
 
 

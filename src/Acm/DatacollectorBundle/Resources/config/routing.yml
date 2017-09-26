@@ -23,3 +23,5 @@ household_by_system_id:
     path: /household/find/system-id/{system_id}
     defaults: {_controller: AcmDatacollectorBundle:HouseHold:getHouseHoldBySystemId}
 
+
+

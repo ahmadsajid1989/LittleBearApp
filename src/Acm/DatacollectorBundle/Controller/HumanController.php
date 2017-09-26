@@ -2,10 +2,12 @@
 
 namespace Acm\DatacollectorBundle\Controller;
 
+use Acm\DatacollectorBundle\Datatables\HumanDatatable;
 use Acm\DatacollectorBundle\Entity\HouseHold;
 use Acm\DatacollectorBundle\Entity\Human;
 use Acm\DatacollectorBundle\Entity\Location;
 use Acm\DatacollectorBundle\Form\HumanType;
+use Sg\DatatablesBundle\Datatable\DatatableInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -88,6 +90,50 @@ class HumanController extends Controller
 
 
         return new Response('Data Saved Successfully', 201);
+    }
+
+    public function listHumanAction(Request $request)
+    {
+
+
+       /* $isAjax = $request->isXmlHttpRequest();
+
+        // Get your Datatable ...
+        $datatable = $this->get('app.datatable.human');
+        $datatable->buildDatatable();*/
+
+        $em = $this->getDoctrine()->getManager();
+        $datatable  =  $em->getRepository("AcmDatacollectorBundle:Human")->findAll();
+
+               //dump($datatable); exit;
+
+        // or use the DatatableFactory
+        /** @var DatatableInterface $datatable */
+        //$datatable = $this->get('sg_datatables.factory')->create(HumanDatatable::class);
+        //$datatable->buildDatatable();
+
+       /* if ($isAjax) {
+            $responseService = $this->get('sg_datatables.response');
+            $responseService->setDatatable($datatable);
+            $responseService->getDatatableQueryBuilder();
+
+            return $responseService->getResponse();
+        }*/
+
+        //dump($datatable); exit;
+
+        return $this->render('AcmDatacollectorBundle:Human:index.html.twig', array(
+            'entities' => $datatable,
+        ));
+
+
+    }
+
+    public function showAction(Human $human)
+    {
+        return $this->render('@AcmDatacollector/Human/show.html.twig', array(
+            'human' => $human
+        ));
     }
 
 

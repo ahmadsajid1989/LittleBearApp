@@ -1,0 +1,10 @@
+human_list:
+    path: /list
+    defaults: {_controller: AcmDatacollectorBundle:Human:listHuman}
+    methods: GET
+human_show:
+    path: /{id}/show
+    defaults: {_controller: AcmDatacollectorBundle:Human:show}
+    methods: GET
+    options:
+             expose: true
