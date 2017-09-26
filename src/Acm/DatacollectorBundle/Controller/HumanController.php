@@ -52,13 +52,13 @@ class HumanController extends Controller
              $location->setAddressVillage(isset($data['location']['address_village']) ? $data['location']['address_village'] : null);
              $location->setAddressUpazilla(isset($data['location']['address_upazilla']) ?$data['location']['address_upazilla'] :null);
              $location->setAddressDistrict(isset($data['location']['address_district']) ?$data['location']['address_district'] :null);
-             $location->setAddressDivision($data['location']['address_division']);
+             $location->setAddressDivision(isset($data['location']['address_division']) ? $data['location']['address_division']: null);
 
 
              $location->setHostAddressVillage(isset($data['location']['host_address_village']) ? $data['location']['host_address_village']: null);
              $location->setHostAddressUpazilla(isset($data['location']['host_address_upazilla']) ? $data['location']['host_address_upazilla'] :null);
              $location->setHostAddressDistrict(isset($data['location']['host_address_district'])? $data['location']['host_address_district'] : null);
-             $location->setHostAddressDivision($data['location']['host_address_division']);
+             $location->setHostAddressDivision(isset($data['location']['host_address_division'])?$data['location']['host_address_division']: null);
 
              $location->setCampName(isset($data['camp_name']) ? $data['camp_name']:null );
              $location->setCampBlock(isset($data['camp_block'])? $data['camp_block'] : null);
