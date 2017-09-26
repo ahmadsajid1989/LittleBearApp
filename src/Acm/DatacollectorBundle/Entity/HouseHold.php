@@ -21,7 +21,7 @@ class HouseHold
      * @var boolean
      * @Groups({"group1"})
      */
-    private $vulnerable;
+    private $vulnerable = 1;
 
     /**
      * @var string

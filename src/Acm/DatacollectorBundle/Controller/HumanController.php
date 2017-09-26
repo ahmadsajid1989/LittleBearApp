@@ -46,7 +46,7 @@ class HumanController extends Controller
 
              $houseHold = new HouseHold();
              $houseHold->setFriendlyName($data['houseHold']['friendly_name']);
-             $houseHold->setVulnerable(isset($data['houseHold']['vulnerable'])? $data['houseHold']['vulnerable'] : null);
+             $houseHold->setVulnerable($data['houseHold']['vulnerable']);
              $location = new Location();
              $location->setHouseHold($houseHold);
              $location->setAddressVillage(isset($data['location']['address_village']) ? $data['location']['address_village'] : null);
