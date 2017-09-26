@@ -24,7 +24,7 @@ class HumanController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-         if(isset($data['houseHold'])){
+         if($data['familyFlag']==1){
 
              $house = $em->getRepository("AcmDatacollectorBundle:HouseHold")->findOneBy(['id' => $data['houseHold']]);
 
@@ -38,31 +38,33 @@ class HumanController extends Controller
          }
 
 
-         if(isset($data['houseHold.friendly_name'])){
+         if(($data['familyFlag'] == 0)){
+
+             //dump($data['houseHold']['friendly_name']); exit;
 
              $houseHold = new HouseHold();
-             $houseHold->setFriendlyName($data['houseHold.friendly_name']);
-             $houseHold->setVulnerable($data['houseHold.vulnerable']);
+             $houseHold->setFriendlyName($data['houseHold']['friendly_name']);
+             $houseHold->setVulnerable($data['houseHold']['vulnerable']);
              $location = new Location();
              $location->setHouseHold($houseHold);
-             $location->setAddressVillage($data['location.address_village']);
-             $location->setAddressUpazilla($data['location.address_upazilla']);
-             $location->setAddressDistrict($data['location.address_district']);
-             $location->setAddressDivision($data['location.address_division']);
+             $location->setAddressVillage(isset($data['location']['address_village']) ? $data['location']['address_village'] : null);
+             $location->setAddressUpazilla($data['location']['address_upazilla']);
+             $location->setAddressDistrict($data['location']['address_district']);
+             $location->setAddressDivision($data['location']['address_division']);
 
 
-             $location->setHostAddressVillage($data['location.host_address_village']);
-             $location->setHostAddressUpazilla($data['location.host_address_upazilla']);
-             $location->setHostAddressDistrict($data['location.host_address_district']);
-             $location->setHostAddressDivision($data['location.host_address_division']);
+             $location->setHostAddressVillage($data['location']['host_address_village']);
+             $location->setHostAddressUpazilla($data['location']['host_address_upazilla']);
+             $location->setHostAddressDistrict($data['location']['host_address_district']);
+             $location->setHostAddressDivision($data['location']['host_address_division']);
 
-             $location->setCampName($data['camp_name']);
-             $location->setCampBlock($data['camp_block']);
-             $location->setCampWard($data['camp_ward']);
+             $location->setCampName(isset($data['camp_name']) ? $data['camp_name']:null );
+             $location->setCampBlock(isset($data['camp_block'])? $data['camp_block'] : null);
+             $location->setCampWard(isset($data['camp_ward'])? $data['camp_ward']: null);
 
 
-             $location->setGpsLatitude($data['location.latitude']);
-             $location->setGpsLongitude($data['location.longitude']);
+             $location->setGpsLatitude($data['location']['latitude']);
+             $location->setGpsLongitude($data['location']['longitude']);
 
              $em->persist($houseHold);
              $em->persist($location);
