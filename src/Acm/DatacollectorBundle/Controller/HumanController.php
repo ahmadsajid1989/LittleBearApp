@@ -46,18 +46,18 @@ class HumanController extends Controller
 
              $houseHold = new HouseHold();
              $houseHold->setFriendlyName($data['houseHold']['friendly_name']);
-             $houseHold->setVulnerable($data['houseHold']['vulnerable']);
+             $houseHold->setVulnerable(isset($data['houseHold']['vulnerable'])? $data['houseHold']['vulnerable'] : null);
              $location = new Location();
              $location->setHouseHold($houseHold);
              $location->setAddressVillage(isset($data['location']['address_village']) ? $data['location']['address_village'] : null);
-             $location->setAddressUpazilla($data['location']['address_upazilla']);
-             $location->setAddressDistrict($data['location']['address_district']);
+             $location->setAddressUpazilla(isset($data['location']['address_upazilla']) ?$data['location']['address_upazilla'] :null);
+             $location->setAddressDistrict(isset($data['location']['address_district']) ?$data['location']['address_district'] :null);
              $location->setAddressDivision($data['location']['address_division']);
 
 
-             $location->setHostAddressVillage($data['location']['host_address_village']);
-             $location->setHostAddressUpazilla($data['location']['host_address_upazilla']);
-             $location->setHostAddressDistrict($data['location']['host_address_district']);
+             $location->setHostAddressVillage(isset($data['location']['host_address_village']) ? $data['location']['host_address_village']: null);
+             $location->setHostAddressUpazilla(isset($data['location']['host_address_upazilla']) ? $data['location']['host_address_upazilla'] :null);
+             $location->setHostAddressDistrict(isset($data['location']['host_address_district'])? $data['location']['host_address_district'] : null);
              $location->setHostAddressDivision($data['location']['host_address_division']);
 
              $location->setCampName(isset($data['camp_name']) ? $data['camp_name']:null );
@@ -65,8 +65,8 @@ class HumanController extends Controller
              $location->setCampWard(isset($data['camp_ward'])? $data['camp_ward']: null);
 
 
-             $location->setGpsLatitude($data['location']['latitude']);
-             $location->setGpsLongitude($data['location']['longitude']);
+             $location->setGpsLatitude(isset($data['location']['latitude']) ? $data['location']['latitude']: null);
+             $location->setGpsLongitude(isset($data['location']['longitude']) ? $data['location']['longitude'] :null);
 
              $em->persist($houseHold);
              $em->persist($location);
