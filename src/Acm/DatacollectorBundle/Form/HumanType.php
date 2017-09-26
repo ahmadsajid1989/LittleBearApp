@@ -19,7 +19,7 @@ class HumanType extends AbstractType
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
             ))
-            ->add('dobFlag')
+            //->add('ageFlag')
             ->add('maritalStatus')
             ->add('sex')
             ->add('age')

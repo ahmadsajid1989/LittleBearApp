@@ -10,12 +10,21 @@ namespace Acm\DatacollectorBundle\EventListener;
 
 
 use Acm\DatacollectorBundle\Entity\Human;
+use DateTime;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 
 
+
+/**
+ * Class DateofBirthListener
+ * @package Acm\DatacollectorBundle\EventListener
+ */
 class DateofBirthListener
 {
 
+    /**
+     * @param LifecycleEventArgs $args
+     */
     public function prePersist(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
@@ -23,9 +32,17 @@ class DateofBirthListener
 
        if($entity instanceof Human){
 
-           if($entity->getDobFlag() == 0){
+           ///dump($entity->getDateOfBirth()); exit;
+
+           if($entity->getDateOfBirth() == null){
 
            $entity->setDateOfBirth($this->findDateofBirthFromAge($entity->getAge()));
+           $entity->setDobFlag(0);
+           }else{
+
+               $entity->setDateOfBirth($entity->getDateOfBirth());
+               $entity->setDobFlag(1);
+               $entity->setAge($this->findAgeFromDateOfBirth($entity->getDateOfBirth()));
            }
 
        }
@@ -34,6 +51,10 @@ class DateofBirthListener
 
     }
 
+    /**
+     * @param $age
+     * @return DateTime
+     */
     private  function findDateofBirthFromAge($age){
 
         $today = new \DateTime('now');
@@ -41,7 +62,18 @@ class DateofBirthListener
         $dateOfBirth = new \DateTime($newDob);
 
         return $dateOfBirth;
+    }
 
+    /**
+     * @param $dateOfbirth
+     * @return int
+     */
+    private function findAgeFromDateOfBirth($dateOfbirth)
+    {
+
+        $age = date_diff(new \DateTime(), $dateOfbirth)->y;
+
+        return $age;
 
     }
 
