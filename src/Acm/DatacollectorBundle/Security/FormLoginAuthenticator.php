@@ -72,7 +72,7 @@ class FormLoginAuthenticator extends AbstractFormLoginAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        $url = $this->router->generate('acm_dashboard');
+        $url = $this->router->generate('human_list');
 
         return new RedirectResponse($url);
     }
