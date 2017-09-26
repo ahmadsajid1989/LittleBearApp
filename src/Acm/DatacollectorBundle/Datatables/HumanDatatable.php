@@ -2,153 +2,174 @@
 
 namespace Acm\DatacollectorBundle\Datatables;
 
-use Sg\DatatablesBundle\Datatable\AbstractDatatable;
-use Sg\DatatablesBundle\Datatable\Style;
-use Sg\DatatablesBundle\Datatable\Column\Column;
-use Sg\DatatablesBundle\Datatable\Column\BooleanColumn;
-use Sg\DatatablesBundle\Datatable\Column\ActionColumn;
-use Sg\DatatablesBundle\Datatable\Column\MultiselectColumn;
-use Sg\DatatablesBundle\Datatable\Column\VirtualColumn;
-use Sg\DatatablesBundle\Datatable\Column\DateTimeColumn;
-use Sg\DatatablesBundle\Datatable\Column\ImageColumn;
-use Sg\DatatablesBundle\Datatable\Filter\TextFilter;
-use Sg\DatatablesBundle\Datatable\Filter\NumberFilter;
-use Sg\DatatablesBundle\Datatable\Filter\SelectFilter;
-use Sg\DatatablesBundle\Datatable\Filter\DateRangeFilter;
-use Sg\DatatablesBundle\Datatable\Editable\CombodateEditable;
-use Sg\DatatablesBundle\Datatable\Editable\SelectEditable;
-use Sg\DatatablesBundle\Datatable\Editable\TextareaEditable;
-use Sg\DatatablesBundle\Datatable\Editable\TextEditable;
+use Sg\DatatablesBundle\Datatable\View\AbstractDatatableView;
+use Sg\DatatablesBundle\Datatable\View\Style;
 
 /**
  * Class HumanDatatable
  *
  * @package Acm\DatacollectorBundle\Datatables
  */
-class HumanDatatable extends AbstractDatatable
+class HumanDatatable extends AbstractDatatableView
 {
     /**
      * {@inheritdoc}
      */
     public function buildDatatable(array $options = array())
     {
-        /*$this->language->set(array(
-            'cdn_language_by_locale' => true
-            //'language' => 'de'
-        ));*/
-
-        $this->language->set(array(
-            'cdn_language_by_locale' => true,
+        $this->topActions->set(array(
+            'start_html' => '<div class="row"><div class="col-sm-3">',
+            'end_html' => '<hr></div></div>',
+            'actions' => array(
+                array(
+                    'route' => $this->router->generate('human_new'),
+                    'label' => $this->translator->trans('datatables.actions.new'),
+                    'icon' => 'glyphicon glyphicon-plus',
+                    'attributes' => array(
+                        'rel' => 'tooltip',
+                        'title' => $this->translator->trans('datatables.actions.new'),
+                        'class' => 'btn btn-primary',
+                        'role' => 'button'
+                    ),
+                )
+            )
         ));
-        $this->ajax->set(array());
+
+        $this->features->set(array(
+            'auto_width' => true,
+            'defer_render' => false,
+            'info' => true,
+            'jquery_ui' => false,
+            'length_change' => true,
+            'ordering' => true,
+            'paging' => true,
+            'processing' => true,
+            'scroll_x' => false,
+            'scroll_y' => '',
+            'searching' => true,
+            'state_save' => false,
+            'delay' => 0,
+            'extensions' => array(),
+            'highlight' => false,
+            'highlight_color' => 'red'
+        ));
+
+        $this->ajax->set(array(
+            'url' => $this->router->generate('human_results'),
+            'type' => 'GET',
+            'pipeline' => 0
+        ));
+
         $this->options->set(array(
-            'classes' => Style::BOOTSTRAP_3_STYLE,
-            'individual_filtering' => true,
+            'display_start' => 0,
+            'defer_loading' => -1,
+            'dom' => 'lfrtip',
+            'length_menu' => array(10, 25, 50, 100),
+            'order_classes' => true,
+            'order' => array(array(0, 'asc')),
+            'order_multi' => true,
+            'page_length' => 10,
+            'paging_type' => Style::FULL_NUMBERS_PAGINATION,
+            'renderer' => '',
+            'scroll_collapse' => false,
+            'search_delay' => 0,
+            'state_duration' => 7200,
+            'stripe_classes' => array(),
+            'class' => Style::BOOTSTRAP_3_STYLE,
+            'individual_filtering' => false,
             'individual_filtering_position' => 'head',
-            'order_cells_top' => true,
-
-            'dom' => 'Bfrtip',
+            'use_integration_options' => true,
+            'force_dom' => false,
+            'row_id' => 'id'
         ));
-        $this->features->set(array());
-
-
-
-        //$users = $this->em->getRepository('AcmDatacollectorBundle:User')->findAll();
 
         $this->columnBuilder
-            ->add('id', Column::class, array(
+            ->add('id', 'column', array(
                 'title' => 'Id',
-                ))
-            ->add('fullName', Column::class, array(
-                'title' => 'Full Name',
-                ))
-            ->add('uniqueId', Column::class, array(
+            ))
+            ->add('fullName', 'column', array(
+                'title' => 'FullName',
+            ))
+            ->add('uniqueId', 'column', array(
                 'title' => 'UniqueId',
-                ))
-            /*->add('dateOfBirth', Column::class, array(
+            ))
+            ->add('dateOfBirth', 'column', array(
                 'title' => 'DateOfBirth',
-                ))
-            ->add('dobFlag', BooleanColumn::class, array(
+            ))
+            ->add('dobFlag', 'boolean', array(
                 'title' => 'DobFlag',
-                ))
-            ->add('sex', Column::class, array(
+            ))
+            ->add('sex', 'column', array(
                 'title' => 'Sex',
-                ))
-            ->add('age', Column::class, array(
+            ))
+            ->add('age', 'column', array(
                 'title' => 'Age',
-                ))
-            ->add('maritalStatus', Column::class, array(
+            ))
+            ->add('maritalStatus', 'column', array(
                 'title' => 'MaritalStatus',
-                ))*/
-            /*->add('picture', Column::class, array(
+            ))
+           /* ->add('picture', 'column', array(
                 'title' => 'Picture',
-                ))*/
-            /*->add('verified', BooleanColumn::class, array(
+            ))*/
+            ->add('verified', 'boolean', array(
                 'title' => 'Verified',
-                ))
-            ->add('createdAt', DateTimeColumn::class, array(
+            ))
+            ->add('createdAt', 'datetime', array(
                 'title' => 'CreatedAt',
-                ))
-            ->add('updatedAt', DateTimeColumn::class, array(
+            ))
+            ->add('updatedAt', 'datetime', array(
                 'title' => 'UpdatedAt',
-                ))
-            ->add('houseHold.id', Column::class, array(
+            ))
+            ->add('houseHold.id', 'column', array(
                 'title' => 'HouseHold Id',
-                ))*/
-            /*->add('houseHold.systemId', Column::class, array(
+            ))
+            ->add('houseHold.systemId', 'column', array(
                 'title' => 'HouseHold SystemId',
-                ))
-            ->add('houseHold.friendlyName', Column::class, array(
+            ))
+            ->add('houseHold.friendlyName', 'column', array(
                 'title' => 'HouseHold FriendlyName',
-                ))
-            ->add('houseHold.vulnerable', Column::class, array(
+            ))
+            ->add('houseHold.vulnerable', 'column', array(
                 'title' => 'HouseHold Vulnerable',
-                ))
-            ->add('houseHold.updatedAt', Column::class, array(
-                'title' => 'HouseHold UpdatedAt',
-                ))
-            ->add('houseHoldRole.id', Column::class, array(
-                'title' => 'HouseHoldRole Id',
-                ))
-            ->add('houseHoldRole.role', Column::class, array(
+            ))
+
+            ->add('houseHoldRole.role', 'column', array(
                 'title' => 'HouseHoldRole Role',
-                ))
-            ->add('houseHoldRole.roleSlug', Column::class, array(
-                'title' => 'HouseHoldRole RoleSlug',
-                ))*/
-            /*->add(null, ActionColumn::class, array(
-                'title' => $this->translator->trans('sg.datatables.actions.title'),
+            ))
+
+            ->add(null, 'action', array(
+                'title' => $this->translator->trans('datatables.actions.title'),
                 'actions' => array(
                     array(
                         'route' => 'human_show',
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
-                        'label' => $this->translator->trans('sg.datatables.actions.show'),
+                        'label' => $this->translator->trans('datatables.actions.show'),
                         'icon' => 'glyphicon glyphicon-eye-open',
                         'attributes' => array(
                             'rel' => 'tooltip',
-                            'title' => $this->translator->trans('sg.datatables.actions.show'),
+                            'title' => $this->translator->trans('datatables.actions.show'),
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button'
                         ),
                     ),
                     array(
-                        'route' => 'human_edit',
+                        'route' => 'human_show',
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
-                        'label' => $this->translator->trans('sg.datatables.actions.edit'),
+                        'label' => $this->translator->trans('datatables.actions.edit'),
                         'icon' => 'glyphicon glyphicon-edit',
                         'attributes' => array(
                             'rel' => 'tooltip',
-                            'title' => $this->translator->trans('sg.datatables.actions.edit'),
+                            'title' => $this->translator->trans('datatables.actions.edit'),
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button'
                         ),
                     )
                 )
-            ))*/
+            ))
         ;
     }
 

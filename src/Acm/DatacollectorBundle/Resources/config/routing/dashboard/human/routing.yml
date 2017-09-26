@@ -8,3 +8,10 @@ human_show:
     methods: GET
     options:
              expose: true
+
+human_results:
+    path:     /results
+    defaults: { _controller: "AcmDatacollectorBundle:Human:listResults" }
+    methods: GET
+    options:
+            expose: true

@@ -4,7 +4,7 @@
 {% block body %}
 
     <h2>Human</h2>
-    {% for entity in entities %}
+   {# {% for entity in entities %}
 
         {{ entity.id }}
         {{ entity.fullName }}
@@ -12,6 +12,8 @@
         {{ entity.dateOfBirth|date('Y-m-d') }}
         {{ entity.age }}
 
-        {% endfor %}
+        {% endfor %}#}
+
+    {{ datatable_render(datatable) }}
 
 {% endblock %}

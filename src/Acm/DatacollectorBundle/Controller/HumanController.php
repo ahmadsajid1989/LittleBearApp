@@ -26,9 +26,9 @@ class HumanController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-         if($data['familyFlag']==1){
+         if($data['familyFlag'] == 1){
 
-             $house = $em->getRepository("AcmDatacollectorBundle:HouseHold")->findOneBy(['id' => $data['houseHold']]);
+             $house = $em->getRepository("AcmDatacollectorBundle:HouseHold")->findOneBy(['id' => $data['houseHold']['id']]);
 
              if($house){
 
@@ -95,38 +95,22 @@ class HumanController extends Controller
     public function listHumanAction(Request $request)
     {
 
-
-       /* $isAjax = $request->isXmlHttpRequest();
-
-        // Get your Datatable ...
         $datatable = $this->get('app.datatable.human');
-        $datatable->buildDatatable();*/
-
-        $em = $this->getDoctrine()->getManager();
-        $datatable  =  $em->getRepository("AcmDatacollectorBundle:Human")->findAll();
-
-               //dump($datatable); exit;
-
-        // or use the DatatableFactory
-        /** @var DatatableInterface $datatable */
-        //$datatable = $this->get('sg_datatables.factory')->create(HumanDatatable::class);
-        //$datatable->buildDatatable();
-
-       /* if ($isAjax) {
-            $responseService = $this->get('sg_datatables.response');
-            $responseService->setDatatable($datatable);
-            $responseService->getDatatableQueryBuilder();
-
-            return $responseService->getResponse();
-        }*/
-
-        //dump($datatable); exit;
+        $datatable->buildDatatable();
 
         return $this->render('AcmDatacollectorBundle:Human:index.html.twig', array(
-            'entities' => $datatable,
+            'datatable' => $datatable,
         ));
+    }
 
+    public function listResultsAction()
+    {
+        $datatable = $this->get('app.datatable.human');
+        $datatable->buildDatatable();
 
+        $query = $this->get('sg_datatables.query')->getQueryFrom($datatable);
+
+        return $query->getResponse();
     }
 
     public function showAction(Human $human)
