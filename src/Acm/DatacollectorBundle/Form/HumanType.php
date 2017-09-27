@@ -15,6 +15,7 @@ class HumanType extends AbstractType
     {
         $builder
             ->add('fullName', TextType::class)
+            ->add('govRegisteredNumber',TextType::class)
             ->add('dateOfBirth', BirthdayType::class, array(
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',

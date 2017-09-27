@@ -23,6 +23,11 @@ class Human
     /**
      * @var string
      */
+    private $govRegisteredNumber;
+
+    /**
+     * @var string
+     */
     private $uniqueId;
 
     /**
@@ -101,6 +106,23 @@ class Human
     {
         $this->fullName = $fullName;
     }
+
+    /**
+     * @return string
+     */
+    public function getGovRegisteredNumber()
+    {
+        return $this->govRegisteredNumber;
+    }
+
+    /**
+     * @param string $govRegisteredNumber
+     */
+    public function setGovRegisteredNumber($govRegisteredNumber)
+    {
+        $this->govRegisteredNumber = $govRegisteredNumber;
+    }
+
 
     /**
      * @return string

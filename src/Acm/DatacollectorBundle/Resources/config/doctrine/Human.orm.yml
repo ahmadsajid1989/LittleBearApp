@@ -23,6 +23,10 @@ Acm\DatacollectorBundle\Entity\Human:
             type:   string
             length: 255
             column: full_name
+        govRegisteredNumber:
+            type: string
+            column: gov_registered_number
+            nullable: true
         uniqueId:
             type: string
             length: 15
