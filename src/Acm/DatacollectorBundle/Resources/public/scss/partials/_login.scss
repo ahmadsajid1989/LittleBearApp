@@ -1,0 +1,9 @@
+.login{
+  @include flexbox;
+  @include align-items(center);
+  @include justify-content(center);
+  @include flex-direction(column);
+  background: url("../images/w-map.png") no-repeat left center; /* path relative to the web directory*/
+  background-size: cover;
+  min-height: 100vh;
+}
