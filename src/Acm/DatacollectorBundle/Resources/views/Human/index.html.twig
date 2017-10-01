@@ -2,18 +2,28 @@
 
 
 {% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>List of All Human</h2>
+                {# {% for entity in entities %}
 
-    <h2>Human</h2>
-   {# {% for entity in entities %}
+                     {{ entity.id }}
+                     {{ entity.fullName }}
+                     {{ entity.uniqueId }}
+                     {{ entity.dateOfBirth|date('Y-m-d') }}
+                     {{ entity.age }}
 
-        {{ entity.id }}
-        {{ entity.fullName }}
-        {{ entity.uniqueId }}
-        {{ entity.dateOfBirth|date('Y-m-d') }}
-        {{ entity.age }}
+                     {% endfor %}#}
+                <div class="table-responsive">
+                    {{ datatable_render(datatable) }}
+                </div>
 
-        {% endfor %}#}
 
-    {{ datatable_render(datatable) }}
+            </div>
+        </div>
+    </div>
+
+
 
 {% endblock %}

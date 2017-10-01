@@ -18,10 +18,10 @@ class HumanDatatable extends AbstractDatatableView
     public function buildDatatable(array $options = array())
     {
         $this->topActions->set(array(
-            'start_html' => '<div class="row"><div class="col-sm-3">',
+            'start_html' => '<div class="row"><div class="col-sm-12">',
             'end_html' => '<hr></div></div>',
             'actions' => array(
-                array(
+                /*array(
                     'route' => $this->router->generate('human_new'),
                     'label' => $this->translator->trans('datatables.actions.new'),
                     'icon' => 'glyphicon glyphicon-plus',
@@ -31,7 +31,7 @@ class HumanDatatable extends AbstractDatatableView
                         'class' => 'btn btn-primary',
                         'role' => 'button'
                     ),
-                )
+                )*/
             )
         ));
 
@@ -85,20 +85,20 @@ class HumanDatatable extends AbstractDatatableView
 
         $this->columnBuilder
             ->add('id', 'column', array(
-                'title' => 'Id',
+                'title' => 'ID',
             ))
             ->add('fullName', 'column', array(
-                'title' => 'FullName',
+                'title' => 'Full Name',
             ))
             ->add('uniqueId', 'column', array(
-                'title' => 'UniqueId',
+                'title' => 'Unique ID',
             ))
             ->add('dateOfBirth', 'column', array(
-                'title' => 'DateOfBirth',
+                'title' => 'Date Of Birth',
             ))
-            ->add('dobFlag', 'boolean', array(
+            /*->add('dobFlag', 'boolean', array(
                 'title' => 'DobFlag',
-            ))
+            ))*/
             ->add('sex', 'column', array(
                 'title' => 'Sex',
             ))
@@ -106,7 +106,7 @@ class HumanDatatable extends AbstractDatatableView
                 'title' => 'Age',
             ))
             ->add('maritalStatus', 'column', array(
-                'title' => 'MaritalStatus',
+                'title' => 'Marital Status',
             ))
            /* ->add('picture', 'column', array(
                 'title' => 'Picture',
@@ -115,26 +115,26 @@ class HumanDatatable extends AbstractDatatableView
                 'title' => 'Verified',
             ))
             ->add('createdAt', 'datetime', array(
-                'title' => 'CreatedAt',
+                'title' => 'Created At',
             ))
-            ->add('updatedAt', 'datetime', array(
-                'title' => 'UpdatedAt',
-            ))
-            ->add('houseHold.id', 'column', array(
-                'title' => 'HouseHold Id',
-            ))
-            ->add('houseHold.systemId', 'column', array(
+           /* ->add('updatedAt', 'datetime', array(
+                'title' => 'Updated At',
+            ))*/
+           /* ->add('houseHold.id', 'column', array(
+                'title' => 'HouseHold ID',
+            ))*/
+            /*->add('houseHold.systemId', 'column', array(
                 'title' => 'HouseHold SystemId',
-            ))
+            ))*/
             ->add('houseHold.friendlyName', 'column', array(
-                'title' => 'HouseHold FriendlyName',
+                'title' => 'Friendly Name',
             ))
             ->add('houseHold.vulnerable', 'column', array(
-                'title' => 'HouseHold Vulnerable',
+                'title' => 'Vulnerable',
             ))
 
             ->add('houseHoldRole.role', 'column', array(
-                'title' => 'HouseHoldRole Role',
+                'title' => 'Role in Household',
             ))
 
             ->add(null, 'action', array(
