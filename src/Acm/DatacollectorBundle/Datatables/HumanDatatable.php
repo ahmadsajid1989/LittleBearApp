@@ -49,7 +49,9 @@ class HumanDatatable extends AbstractDatatableView
             'searching' => true,
             'state_save' => false,
             'delay' => 0,
-            'extensions' => array(),
+            'extensions' => array(
+                'responsive' => true
+            ),
             'highlight' => false,
             'highlight_color' => 'red'
         ));
@@ -88,7 +90,7 @@ class HumanDatatable extends AbstractDatatableView
                 'title' => 'ID',
             ))
             ->add('fullName', 'column', array(
-                'title' => 'Full Name',
+                'title' => 'Name',
             ))
             ->add('uniqueId', 'column', array(
                 'title' => 'Unique ID',
@@ -134,7 +136,7 @@ class HumanDatatable extends AbstractDatatableView
             ))
 
             ->add('houseHoldRole.role', 'column', array(
-                'title' => 'Role in Household',
+                'title' => 'Role',
             ))
 
             ->add(null, 'action', array(
@@ -146,28 +148,26 @@ class HumanDatatable extends AbstractDatatableView
                             'id' => 'id'
                         ),
                         'label' => $this->translator->trans('datatables.actions.show'),
-                        'icon' => 'glyphicon glyphicon-eye-open',
                         'attributes' => array(
                             'rel' => 'tooltip',
                             'title' => $this->translator->trans('datatables.actions.show'),
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button'
                         ),
-                    ),
-                    array(
+                    )
+                    /*array(
                         'route' => 'human_show',
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
                         'label' => $this->translator->trans('datatables.actions.edit'),
-                        'icon' => 'glyphicon glyphicon-edit',
                         'attributes' => array(
                             'rel' => 'tooltip',
                             'title' => $this->translator->trans('datatables.actions.edit'),
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button'
                         ),
-                    )
+                    )*/
                 )
             ))
         ;
