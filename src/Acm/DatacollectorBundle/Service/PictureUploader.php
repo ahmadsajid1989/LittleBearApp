@@ -11,64 +11,59 @@ namespace Acm\DatacollectorBundle\Service;
 
 use Acm\DatacollectorBundle\Entity\Human;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Gedmo\Exception\UploadableCantWriteException;
+use Gaufrette\Filesystem;
 
+/**
+ * Class PictureUploader
+ * @package Acm\DatacollectorBundle\Service
+ */
 class PictureUploader
 {
     /**
-     * @var string
+     * @var array
      */
-    private $targetDir;
-
-
+    private static $allowedMimeTypes = array(
+        'image/jpeg',
+        'image/png',
+        'image/gif'
+    );
 
     /**
-     * PicUploader constructor.
-     *
-     * @param $targetDir
-     *
+     * @var Filesystem
      */
-    public function __construct($targetDir)
-    {
-        $this->targetDir    = $targetDir;
-    }
+    private $filesystem;
 
     /**
-     * @param Human $human
-     * @param UploadedFile $file
-     *
-     * @return array | string
+     * PictureUploader constructor.
+     * @param Filesystem $filesystem
      */
-    public function uploadFile(Human $human, UploadedFile $file)
+    public function __construct(Filesystem $filesystem)
     {
-        $fileData = array();
-
-        $fileName = $human->getUniqueId().'.'.$file->guessExtension();
-        if(!$this->isValidMimeType($file)) {
-            return $fileData['code'] = ErrorCodes::INVALID_IMAGE;
-        }
-
-        try{
-            $file->move($this->targetDir, $fileName);
-            $fileData['code'] = ErrorCodes::PROFILE_PIC_UPLOAD_SUCCESS;
-        } catch (UploadableCantWriteException $e) {
-            $fileData['code'] = ErrorCodes::PROFILE_PIC_UPLOAD_FAILURE;
-        }
-
-        $fileData['fileName'] = $fileName;
-
-        return $fileData;
+        $this->filesystem = $filesystem;
     }
 
     /**
      * @param UploadedFile $file
-     * @return bool
+     * @return string
      */
-    private function isValidMimeType(UploadedFile $file)
+    public function upload(UploadedFile $file)
     {
-        $mimeTypeArray = ["image/jpeg", "image/png"];
-        $fileMimeType = $file->getClientMimeType();
-        return in_array($fileMimeType, $mimeTypeArray);
-    }
+        // Check if the file's mime type is in the list of allowed mime types.
+        if (!in_array($file->getClientMimeType(), self::$allowedMimeTypes)) {
+            throw new \InvalidArgumentException(sprintf('Files of type %s are not allowed.', $file->getClientMimeType()));
+        }
 
+        if ($file->getSize() > 556126){
+            throw new \InvalidArgumentException(sprintf('Files size %s is exceeded max limit.', $file->getSize()));
+        }
+
+        // Generate a unique filename based on the date and add file extension of the uploaded file
+        $filename = sprintf('%s/%s/%s/%s.%s', date('Y'), date('m'), date('d'), uniqid(), $file->getClientOriginalExtension());
+
+        $adapter = $this->filesystem->getAdapter();
+       // $adapter->setMetadata($filename, array('contentType' => $file->getClientMimeType()));
+        $adapter->write($filename, file_get_contents($file->getPathname()));
+
+        return $filename;
+    }
 }

@@ -92,3 +92,17 @@ nelmio_cors:
             max_age: 3600
 
 nelmio_api_doc: ~
+
+knp_gaufrette:
+    adapters:
+        photo_storage:
+            local:
+                directory: '%kernel.root_dir%/../uploads/human_pics'
+                create: true
+            service:
+                id: photo_storage_filesystem
+
+    filesystems:
+        photo_storage:
+            adapter:    photo_storage
+            alias:      photo_storage_filesystem

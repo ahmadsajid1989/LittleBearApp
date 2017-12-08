@@ -7,6 +7,7 @@ use Acm\DatacollectorBundle\Entity\HouseHold;
 use Acm\DatacollectorBundle\Entity\Human;
 use Acm\DatacollectorBundle\Entity\Location;
 use Acm\DatacollectorBundle\Form\HumanType;
+use Acm\DatacollectorBundle\Form\PhotoType;
 use Sg\DatatablesBundle\Datatable\DatatableInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -88,8 +89,10 @@ class HumanController extends Controller
              $em->flush();
          }
 
+        $humanId =  $human->getUniqueId();
 
-        return new Response('Data Saved Successfully', 201);
+
+        return new JsonResponse(array('message'=>'Data Saved Successfully', 'humanId' => $humanId), 200);
     }
 
     public function listHumanAction(Request $request)
@@ -118,6 +121,38 @@ class HumanController extends Controller
         return $this->render('@AcmDatacollector/Human/show.html.twig', array(
             'human' => $human
         ));
+    }
+
+    public function uploadPictureAction(Request $request)
+    {
+        $file = $request->files->get('photo');
+        $picture = $this->getPhotoUploader()->upload($file);
+        $humanId = $request->request->get('humanId');
+
+        $em = $this->getDoctrine()->getManager();
+        $human = $em->getRepository('AcmDatacollectorBundle:Human')->findOneBy(['uniqueId' => $humanId]);
+
+        if(!$human)
+        {
+            return new JsonResponse(array('No human found with this id'), 404);
+
+        } if($human) {
+
+            $human->setPicture($picture);
+            $em->persist($human);
+            $em->flush();
+
+            return new JsonResponse(array('message' => 'Image Saved Successfully'), 200);
+
+        }
+
+       return new JsonResponse(array('message' => 'Something went wrong'), 500);
+
+    }
+
+    protected function getPhotoUploader()
+    {
+        return $this->get('photo_uploader');
     }
 
 

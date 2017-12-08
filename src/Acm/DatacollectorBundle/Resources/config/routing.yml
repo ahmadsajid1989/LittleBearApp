@@ -3,6 +3,11 @@ human_new:
     defaults: { _controller: AcmDatacollectorBundle:Human:newApi }
     methods: [POST]
 
+human_upload_photo:
+    path: /human/upload
+    defaults: {_controller: AcmDatacollectorBundle:Human:uploadPicture}
+    methods: [POST]
+
 householdrole_list:
     path: /householdrole/list
     defaults: {_controller: AcmDatacollectorBundle:HouseHoldRole:list}

@@ -5,9 +5,9 @@ services:
         tags:
             - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccessResponse }
 
-    acm_api.pic_uploader:
+    photo_uploader:
         class: Acm\DatacollectorBundle\Service\PictureUploader
-        arguments: ['%pic.upload.dir%']
+        arguments: ['@photo_storage_filesystem']
 
     dob.listener:
         class: Acm\DatacollectorBundle\EventListener\DateofBirthListener
