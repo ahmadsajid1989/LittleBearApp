@@ -2,11 +2,13 @@
 /app/config/parameters.yml
 /build/
 /phpunit.xml
-/var/*
+/var/cache
+/var/sessions
 /vendor/
 /web/bundles/
 /.idea/*
-
+/uploads/
 /src/Test/*
 
 web/config.php
+/web/uploads/
