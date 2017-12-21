@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class HumanController extends Controller
 {
@@ -116,10 +117,18 @@ class HumanController extends Controller
         return $query->getResponse();
     }
 
-    public function showAction(Human $human)
+    public function showAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('AcmDatacollectorBundle:Human')->find($id);
+
+        if(!$entity)
+        {
+            throw $this->createNotFoundException("Resource Not Found");
+        }
+
         return $this->render('@AcmDatacollector/Human/show.html.twig', array(
-            'human' => $human
+            'entity' => $entity
         ));
     }
 
