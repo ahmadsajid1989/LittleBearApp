@@ -95,8 +95,9 @@ class HumanDatatable extends AbstractDatatableView
             ->add('uniqueId', 'column', array(
                 'title' => 'Unique ID',
             ))
-            ->add('dateOfBirth', 'column', array(
+            ->add('dateOfBirth', 'datetime', array(
                 'title' => 'Date Of Birth',
+                'date_format' => 'll'
             ))
             /*->add('dobFlag', 'boolean', array(
                 'title' => 'DobFlag',
