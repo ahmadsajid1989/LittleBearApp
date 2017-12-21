@@ -15,6 +15,27 @@ class HumanDatatable extends AbstractDatatableView
     /**
      * {@inheritdoc}
      */
+
+    public function getLineFormatter()
+    {
+        $formatter = function($line){
+            if($line['sex'] == 1)
+            {
+                $line['gender'] = 'male';
+            } elseif ($line['sex'] = 2)
+            {
+                $line['gender'] = 'female';
+            }elseif ($line['sex'] = 3)
+            {
+                $line['gender'] = 'third gender';
+            }
+
+            return $line;
+        };
+
+        return $formatter;
+    }
+
     public function buildDatatable(array $options = array())
     {
         $this->topActions->set(array(
@@ -66,7 +87,7 @@ class HumanDatatable extends AbstractDatatableView
             'display_start' => 0,
             'defer_loading' => -1,
             'dom' => 'lfrtip',
-            'length_menu' => array(10, 25, 50, 100),
+            'length_menu' => array(10, 25, 50, 100,1000),
             'order_classes' => true,
             'order' => array(array(0, 'asc')),
             'order_multi' => true,
@@ -102,9 +123,9 @@ class HumanDatatable extends AbstractDatatableView
             /*->add('dobFlag', 'boolean', array(
                 'title' => 'DobFlag',
             ))*/
-            ->add('sex', 'column', array(
-                'title' => 'Sex',
-            ))
+            ->add('sex', 'column', array('visible' => false)
+            )
+            ->add('gender', 'virtual', array('title' => 'Sex'))
             ->add('age', 'column', array(
                 'title' => 'Age',
             ))
