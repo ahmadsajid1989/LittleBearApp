@@ -127,8 +127,11 @@ class HumanController extends Controller
             throw $this->createNotFoundException("Resource Not Found");
         }
 
+        $path =  $this->get('kernel')->getProjectDir();
+
         return $this->render('@AcmDatacollector/Human/show.html.twig', array(
-            'entity' => $entity
+            'entity' => $entity,
+            'imgpath' => $path
         ));
     }
 

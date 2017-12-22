@@ -1,3 +1,97 @@
-{{ entity.fullName }}
-{{ entity.age }}
-{{ entity.govRegisteredNumber }}
+{% extends '::base.html.twig' %}
+
+
+{% block main %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-7 center-block human">
+                {{ dump(imgpath) }}
+                <div class="panel panel-default m-t-lg">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <h3 class="panel-title">Details of <strong>{{ entity.fullName }}</strong></h3>
+                            </div>
+                            <div class="col-sm-4 text-right">
+
+                                    {% if entity.verified == "true" %}
+                                        <span class="label label-success">Verified</span>
+                                    {% else %}
+                                        <span class="label label-danger">Not Verified!</span>
+                                    {% endif %}
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <tr>
+                                <th>Name</th>
+                                <td rowspan="4">
+                                    <img src="{{ imgpath }}/{{ entity.picture }}" class="img-responsive">
+                                    </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    {{ entity.fullName }}
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <th>Government Registration ID</th>
+                            </tr>
+
+                            <tr>
+                                <td>{{ entity.govRegisteredNumber }}</td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2">
+                                    <table class="table">
+                                        <tr>
+                                            <th>Age</th>
+                                            <th>Sex</th>
+                                            <th>Marital Status</th>
+                                        </tr>
+
+                                        <tr>
+                                            <td>{{ entity.age }}</td>
+                                            <td>{% if entity.sex == "2" %}
+                                                    Female
+                                                {% elseif entity.sex == "3" %}
+                                                    3rd Gender
+                                                {% else %}
+                                                    Male
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ entity.maritalStatus }}</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <th><strong>Household</strong></th>
+                                <th>Role in Household</th>
+                            </tr>
+
+                            <tr>
+                                <td>{{ entity.houseHold.friendlyName }}</td>
+                                <td>{{ entity.houseHoldRole }}</td>
+                            </tr>
+
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
