@@ -13,12 +13,29 @@
                         <h4>Add a new user from here to access your application</h4>
                     </div>
                     {{ form_start(form) }}
-                    {{ form_row(form.username) }}
-                    {{ form_row(form.email) }}
-                    {{ form_row(form.plainPassword.first) }}
-                    {{ form_row(form.plainPassword.second) }}
+                    <div class="form-group m-t-lg">
+                        {{ form_row(form.username, {'attr' : { 'class' : 'form-control'}}) }}
+                    </div>
 
-                    <button type="submit">Register!</button>
+                    <div class="form-group m-t-sm">
+                        {{ form_row(form.email, {'attr' : { 'class' : 'form-control'}}) }}
+                    </div>
+
+                    <div class="form-group m-t-sm">
+                        {{ form_row(form.plainPassword.first, {'attr' : { 'class' : 'form-control'}}) }}
+                    </div>
+
+                    <div class="form-group m-t-sm">
+                        {{ form_row(form.plainPassword.second, {'attr' : { 'class' : 'form-control'}}) }}
+                    </div>
+
+                    <div class="form-group m-t-sm">
+                        {{ form_row(form.userType, {'attr' : { 'class' : 'form-control'}}) }}
+                    </div>
+
+
+
+                    <button type="submit" class="btn btn-primary m-b-lg m-t-sm">Register!</button>
                     {{ form_end(form) }}
 
                 </div>
