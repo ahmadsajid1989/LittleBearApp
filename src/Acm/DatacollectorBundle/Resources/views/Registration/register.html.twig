@@ -33,9 +33,12 @@
                         {{ form_row(form.userType, {'attr' : { 'class' : 'form-control'}}) }}
                     </div>
 
+                    <div class="clearfix m-b-lg m-t-sm">
+                        <button type="submit" class="btn btn-primary pull-left">Register!</button>
+                        <a class="btn btn-danger pull-right" href="{{ path('human_list') }}">Cancel</a>
+                    </div>
 
 
-                    <button type="submit" class="btn btn-primary m-b-lg m-t-sm">Register!</button>
                     {{ form_end(form) }}
 
                 </div>
