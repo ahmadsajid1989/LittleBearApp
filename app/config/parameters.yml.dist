@@ -24,4 +24,4 @@ parameters:
     jwt_token_ttl:        2592000
 
 
-    pic.upload.dir: '%kernel.root_dir%/../web/uploads/human_pics'
+    pic.upload.dir: '%kernel.root_dir%/../uploads/human_pics'

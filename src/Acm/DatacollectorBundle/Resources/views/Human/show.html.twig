@@ -5,7 +5,6 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-7 center-block human">
-                {{ dump(imgpath) }}
                 <div class="panel panel-default m-t-lg">
                     <div class="panel-heading">
                         <div class="row">
@@ -79,7 +78,7 @@
                             </tr>
 
                             <tr>
-                                <td>{{ entity.houseHold.friendlyName }}</td>
+                                <td>{% if entity.houseHold is not null %}{{ entity.houseHold.friendlyName }}{% endif %}</td>
                                 <td>{{ entity.houseHoldRole }}</td>
                             </tr>
 
