@@ -15,6 +15,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+ * Class HumanController
+ * @package Acm\DatacollectorBundle\Controller
+ */
 class HumanController extends Controller
 {
     public function newApiAction(Request $request)
@@ -127,7 +131,7 @@ class HumanController extends Controller
             throw $this->createNotFoundException("Resource Not Found");
         }
 
-        $path =  dirname($this->getParameter('pic.upload.dir'));
+        $path =  $this->getUploadDir();
 
         return $this->render('@AcmDatacollector/Human/show.html.twig', array(
             'entity' => $entity,
@@ -166,6 +170,15 @@ class HumanController extends Controller
     {
         return $this->get('photo_uploader');
     }
+
+    protected function getUploadDir()
+    {
+        // get rid of the __DIR__ so it doesn't screw up
+        // when displaying uploaded doc/image in the view.
+        return $this->getParameter('pic.upload.dir');
+    }
+
+
 
 
 }

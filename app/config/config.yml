@@ -97,7 +97,7 @@ knp_gaufrette:
     adapters:
         photo_storage:
             local:
-                directory: '%kernel.root_dir%/../uploads/human_pics'
+                directory: '%kernel.root_dir%/../web/uploads/photographs'
                 create: true
             service:
                 id: photo_storage_filesystem

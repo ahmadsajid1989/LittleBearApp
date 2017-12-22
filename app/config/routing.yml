@@ -26,6 +26,7 @@ acm_registration:
 #    defaults: {_controller: AcmDatacollectorBundle:User:findUser}
 #    methods: [GET]
 
+
 api_login_check:
     path: /api/login_check
 
