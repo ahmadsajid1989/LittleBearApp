@@ -3385,10 +3385,11 @@ body {
 .center-block {
   float: none; }
 
-.human {
-  /*.table > thead > tr > th, .table > thead > tr > td, .table > tbody > tr > th, .table > tbody > tr > td, .table > tfoot > tr > th, .table > tfoot > tr > td {
-    border: none;
-  }*/ }
+.human .table > thead > tr > th, .human .table > thead > tr > td, .human .table > tbody > tr > th, .human .table > tbody > tr > td, .human .table > tfoot > tr > th, .human .table > tfoot > tr > td {
+  border: none; }
+
+.human table table > tr > td {
+  padding-left: 0; }
 
 .login {
   display: -webkit-box;
