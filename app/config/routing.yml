@@ -1,3 +1,26 @@
+human_list:
+    path: /
+    defaults: {_controller: AcmDatacollectorBundle:Human:listHuman}
+    methods: GET
+
+#human_list:
+#    path: /list
+#    defaults: {_controller: AcmDatacollectorBundle:Human:listHuman}
+#    methods: GET
+human_show:
+    path: /{id}/show
+    defaults: {_controller: AcmDatacollectorBundle:Human:show}
+    methods: GET
+    options:
+             expose: true
+
+human_results:
+    path:     /results
+    defaults: { _controller: "AcmDatacollectorBundle:Human:listResults" }
+    methods: GET
+    options:
+            expose: true
+
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix:   /documentaion

@@ -1,3 +1,3 @@
-human_:
-    resource: "@AcmDatacollectorBundle/Resources/config/routing/dashboard/human/routing.yml"
-    prefix:   /human
+#human_:
+#    resource: "@AcmDatacollectorBundle/Resources/config/routing/dashboard/human/routing.yml"
+#    prefix:   /human

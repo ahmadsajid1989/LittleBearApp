@@ -131,7 +131,7 @@ class HumanController extends Controller
             throw $this->createNotFoundException("Resource Not Found");
         }
 
-        $path =  $this->getUploadDir();
+        $path =  $this->getParameter('pic.upload.dir');
 
         return $this->render('@AcmDatacollector/Human/show.html.twig', array(
             'entity' => $entity,
